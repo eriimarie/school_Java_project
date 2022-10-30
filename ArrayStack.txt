@@ -1,0 +1,50 @@
+public class ArrayStack<T> implements StackInterface<T> {
+
+	private T[] stack; // Array of stack entries
+	private int topIndex; // Index of top entry
+	private static final int DEFAULT_CAPACITY = 50;
+
+	public ArrayStack() {
+		this(DEFAULT_CAPACITY);
+	} // end default constructor
+
+	public ArrayStack(int initialCapacity) {
+		@SuppressWarnings("unchecked")
+		T[] tempStack = (T[]) new Object[initialCapacity];
+		stack = tempStack;
+		topIndex = -1;
+	} // end constructor
+
+	public void push(T newEntry) {
+		stack[topIndex + 1] = newEntry;
+		topIndex++;
+	} // end push
+
+	public T peek() {
+		if (isEmpty())
+			return null;
+		else
+			return stack[topIndex];
+	} // end peek
+
+	public T pop() {
+		if (isEmpty()) {
+			return null;
+		} else {
+			T top = stack[topIndex];
+			stack[topIndex] = null;
+			topIndex--;
+			return top;
+		} // end if
+	} // end pop
+
+	public boolean isEmpty() {
+		return topIndex < 0;
+	} // end isEmpty
+
+	public void clear() {
+		while (!isEmpty()) {
+			pop();
+		}
+	} // end clear
+} // end ArrayStack
